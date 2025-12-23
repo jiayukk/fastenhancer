@@ -14,7 +14,7 @@ def main(args):
     wav, _ = librosa.load(args.audio_path, sr=16_000)
     wav = wav.reshape(1, -1)
     wav = np.clip(wav, a_min=-1, a_max=1)
-    wav = np.concatenate([wav] * 8, axis=1)
+    # wav = np.concatenate([wav] * 8, axis=1) # the output waveform will be [1, 8L].
     length = wav.shape[-1]
     wav = np.pad(wav, ((0, 0), (0, args.n_fft)), mode='constant')  # pad right
 
