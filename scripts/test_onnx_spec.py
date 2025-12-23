@@ -14,7 +14,7 @@ def main(args):
     print("Preparing input...", end=" ")
     wav, _ = librosa.load(args.audio_path, sr=16_000)
     wav = torch.from_numpy(wav).view(1, -1).clamp(min=-1, max=1)
-    wav = torch.cat([wav] * 8, dim=1)
+    # wav = torch.cat([wav] * 8, dim=1)   # the output waveform will be [1, 8L].
     length = wav.size(-1) // args.hop_size * args.hop_size
     wav = wav[:, :length]
     if args.win_type == "hann":
